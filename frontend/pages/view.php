@@ -1,21 +1,9 @@
 <?php
-// Mock product data
-$product = [
-    "id" => 1,
-    "title" => "Laptop",
-    "images" => [ // Array for carousel support
-        "main" => "https://via.placeholder.com/300/FF0000/FFFFFF?text=Main"
-    ],
-    "description" => "A high-performance laptop.",
-    "data" => "Brand: Example | Model: X123",
-    "prices" => [
-        ["retailer" => "Store A", "price" => 999.99],
-        ["retailer" => "Store B", "price" => 949.99],
-        ["retailer" => "Store C", "price" => 979.99]
-    ],
-    "best_price" => 949.99,
-    "rating" => "⭐⭐⭐⭐"
-];
+// Check for product ID
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    echo '<p>Error: No product ID provided</p>';
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +23,7 @@ $product = [
         }
         .main-layout {
             display: flex;
-            min-height: calc(100vh - 60px); /* Adjust for header height */
+            min-height: calc(100vh - 60px);
         }
         .carousel-column {
             width: 40%;
@@ -65,12 +53,12 @@ $product = [
 
     <!-- Main Layout -->
     <div class="main-layout">
-        <!-- Left Section: Carousel (Removed "Laptop" from alt text) -->
+        <!-- Left Section: Carousel -->
         <div class="carousel-column">
             <div class="carousel-container" style="position: relative;">
                 <!-- Main Image -->
                 <div class="productImageDiv">
-                    <input type="image" id="mainImage" src="<?php echo htmlspecialchars($product['images']['main']); ?>" alt="Product Image" class="productImage">
+                    <input type="image" id="mainImage" src="https://via.placeholder.com/300" alt="Product Image" class="productImage">
                 </div>
                 <!-- Carousel Controls -->
                 <button class="carousel-control prev" style="position: absolute; top: 50%; left: 0; transform: translateY(-50%);">❮</button>
@@ -78,13 +66,13 @@ $product = [
             </div>
         </div>
 
-        <!-- Right Section: Details and Bottom Section (Restored "Laptop" title) -->
+        <!-- Right Section: Details and Bottom Section -->
         <div class="details-column">
             <!-- Details -->
             <div class="contentContainer">
-                <h2><?php echo htmlspecialchars($product['title']); ?></h2>
-                <p><?php echo htmlspecialchars($product['description']); ?></p>
-                <p><?php echo htmlspecialchars($product['data']); ?></p>
+                <h2>Loading...</h2>
+                <p>Loading description...</p>
+                <p>Loading brand and category...</p>
                 <table class="price-table" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
                     <thead>
                         <tr>
@@ -93,12 +81,7 @@ $product = [
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($product['prices'] as $price): ?>
-                            <tr>
-                                <td style="border: 1px solid black; padding: 5px;"><?php echo htmlspecialchars($price['retailer']); ?></td>
-                                <td style="border: 1px solid black; padding: 5px;">$<?php echo number_format($price['price'], 2); ?></td>
-                            </tr>
-                        <?php endforeach; ?>
+                        <!-- Populated by JavaScript -->
                     </tbody>
                 </table>
             </div>
@@ -107,16 +90,16 @@ $product = [
             <div class="bottom-section" style="display: flex; justify-content: space-between; padding: 10px; border-top: 1px solid black;">
                 <div style="width: 33%;">
                     <h3>Best Price</h3>
-                    <p>$<?php echo number_format($product['best_price'], 2); ?></p>
+                    <p>Loading...</p>
                 </div>
                 <div style="width: 33%;">
                     <h3>Rating</h3>
-                    <p id="ratingDisplay"><?php echo htmlspecialchars($product['rating']); ?></p>
+                    <p id="ratingDisplay">Loading...</p>
                     <button id="rateButton">Click to Rate</button>
                 </div>
                 <div style="width: 33%;">
                     <h3>Reviews</h3>
-                    <p>User reviews will go here.</p>
+                    <p>Loading...</p>
                 </div>
             </div>
         </div>
